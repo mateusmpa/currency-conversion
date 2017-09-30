@@ -1,5 +1,16 @@
 $(document).ready ->
-  $('form').submit ->
+  $('select').change ->
+    resultExchange();
+  $('button').click ->
+    currency = $('#currency').val();
+    currency_destination = $('#currency_destination').val();
+    $('#currency').val(currency_destination);
+    $('#currency_destination').val(currency);
+    resultExchange();
+  $('input').focusout ->
+    resultExchange();
+  resultExchange = ->
+    $('#result').val('Calculando...');
     if $('form').attr('action') == '/exchange'
       $.ajax '/exchange',
           type: 'POST'
